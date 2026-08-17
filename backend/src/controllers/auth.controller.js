@@ -28,3 +28,7 @@ export const login = catchAsync(async(req, res)=>{
     user.password = undefined;
     res.json({user, token});
 });
+
+export const getMe = catchAsync(async(req, res) =>{
+    res.json({user:req.user});
+})
