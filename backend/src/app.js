@@ -1,5 +1,6 @@
 import express from "express";
 import authRouter from "./routes/auth.router.js";
+import diagnosisRouter from "./routes/diagnosis.router.js";
 
 const app = express();
 
@@ -11,5 +12,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/auth", authRouter);
+app.use("/diagnosis", diagnosisRouter);
 
 export default app;
