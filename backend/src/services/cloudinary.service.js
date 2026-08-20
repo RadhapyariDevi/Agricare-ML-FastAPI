@@ -13,3 +13,7 @@ export const uploadToCloudinary = async(buffer, folder = "leaf-diagnosis")=>{
         streamifier.createReadStream(buffer).pipe(uploadStream);
     });
 };
+
+export const deleteFromCloudinary = async (publicId) => {
+    return cloudinary.uploader.destroy(publicId);
+};
