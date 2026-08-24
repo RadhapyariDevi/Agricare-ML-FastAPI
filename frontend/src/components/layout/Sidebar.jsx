@@ -10,6 +10,8 @@ import {
   LogOut,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 const navItems = [
   { name: "Upload", href: "/dashboard", icon: Camera },
@@ -20,6 +22,12 @@ const navItems = [
 
 function Sidebar() {
   const pathname = usePathname();
+  const { logout } = useAuth();
+  const router = useRouter();
+  const handleLogout = () => {
+    logout();
+    router.push("/login");
+  };
 
   return (
     <aside className="w-72 h-screen bg-sidebar border-r border-border flex flex-col justify-between px-4 py-6">
@@ -52,7 +60,10 @@ function Sidebar() {
         </nav>
       </div>
 
-      <button className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-danger hover:bg-danger/10 transition">
+      <button
+        className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-danger hover:bg-danger/10 transition"
+        onClick={handleLogout}
+      >
         <LogOut size={18} />
         Logout
       </button>
