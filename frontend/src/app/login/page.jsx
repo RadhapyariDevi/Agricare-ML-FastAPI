@@ -6,9 +6,11 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import api from "@/lib/api";
 import AuthLayout from "@/components/layout/AuthLayout";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Login() {
   const router = useRouter();
+  const { setUser } = useAuth();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -32,7 +34,8 @@ export default function Login() {
       });
 
       Cookies.set("token", res.data.token, { expires: 7 });
-      router.push("/dashboard");
+      setUser(res.data.user);
+      router.push("/upload");
     } catch (err) {
       setError(err.response?.data?.message || "Invalid email or password");
     } finally {
@@ -63,7 +66,10 @@ export default function Login() {
             Email Address
           </label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+            <Mail
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+              size={18}
+            />
             <input
               type="email"
               name="email"
@@ -80,7 +86,10 @@ export default function Login() {
             Password
           </label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
+            <Lock
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+              size={16}
+            />
             <input
               type="password"
               name="password"
@@ -107,7 +116,10 @@ export default function Login() {
 
       <p className="text-center text-muted mt-6">
         {`Don't have an account? `}
-        <Link href="/register" className="text-tertiary font-semibold underline">
+        <Link
+          href="/register"
+          className="text-tertiary font-semibold underline"
+        >
           Register here
         </Link>
       </p>

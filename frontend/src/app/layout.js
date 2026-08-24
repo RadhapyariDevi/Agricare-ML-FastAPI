@@ -11,10 +11,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="flex bg-background text-foreground">
+      <body className="flex h-screen overflow-hidden bg-background text-foreground">
         <AuthProvider>
           <Sidebar />
-          <main className="flex-1 p-8">{children}</main>
+          <main className="flex-1 h-screen overflow-y-auto p-8">{children}</main>
         </AuthProvider>
       </body>
     </html>

@@ -45,7 +45,7 @@ export default function Register() {
       });
 
       Cookies.set("token", res.data.token, { expires: 7 });
-      router.push("/dashboard");
+      router.push("/upload");
     } catch (err) {
       setError(
         err.response?.data?.message || "Registration failed. Please try again.",

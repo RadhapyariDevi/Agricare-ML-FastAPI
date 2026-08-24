@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/AuthContext.jsx";
 
 const navItems = [
-  { name: "Upload", href: "/dashboard", icon: Camera },
+  { name: "Upload", href: "/upload", icon: Camera },
   { name: "History", href: "/history", icon: FolderOpen },
   { name: "Chatbot", href: "/chatbot", icon: MessageSquare },
   { name: "Agriculture News", href: "/news", icon: Newspaper },
@@ -30,7 +30,7 @@ function Sidebar() {
   };
 
   return (
-    <aside className="w-72 h-screen bg-sidebar border-r border-border flex flex-col justify-between px-4 py-6">
+    <aside className="w-72 h-screen shrink-0 bg-sidebar border-r border-border flex flex-col justify-between px-4 py-6">
       <div>
         <div className="flex items-center gap-2 mb-8 px-2">
           <Leaf className="text-primary" size={22} />
