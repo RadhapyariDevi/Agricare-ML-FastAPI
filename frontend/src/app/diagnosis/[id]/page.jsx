@@ -90,14 +90,14 @@ export default function DiagnosisPage({ params }) {
                   ?.scrollIntoView({ behavior: "smooth" })
               }
               disabled={diagnosis.isHealthy || !diagnosis.prevention?.length}
-              className="bg-primary hover:bg-primary-hover disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold flex-1 px-6 py-3 rounded-lg shadow-md flex items-center justify-center gap-2"
+              className="bg-primary hover:bg-primary-hover cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold flex-1 px-6 py-3 rounded-lg shadow-md flex items-center justify-center gap-2"
             >
               <Wrench size={20} />
               Talk with AI
             </button>
             <button
               onClick={() => router.push("/upload")}
-              className="border-2 border-tertiary text-foreground font-semibold px-6 py-3 rounded-lg flex items-center justify-center gap-2"
+              className="border-2 border-tertiary text-foreground font-semibold px-6 py-3 rounded-lg flex items-center justify-center gap-2 cursor-pointer"
             >
               <Camera size={20} />
               New Scan

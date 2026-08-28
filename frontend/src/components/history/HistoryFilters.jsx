@@ -11,7 +11,7 @@ export default function HistoryFilters({ statusFilter, onChange }) {
         <button
           key={f.key}
           onClick={() => onChange(f.key)}
-          className={`px-5 py-3 rounded-full font-semibold text-sm whitespace-nowrap transition ${
+          className={`px-5 py-3 rounded-full font-semibold text-sm whitespace-nowrap transition hover:cursor-pointer ${
             statusFilter === f.key
               ? "bg-[#e9e9dd] text-foreground"
               : "bg-background border border-input-border text-foreground"

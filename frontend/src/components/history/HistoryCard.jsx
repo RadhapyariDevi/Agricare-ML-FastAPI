@@ -29,7 +29,7 @@ export default function HistoryCard({ item, onDeleteClick }) {
             </h3>
             <button
               onClick={() => onDeleteClick(item._id)}
-              className="p-1 text-muted-foreground hover:text-danger transition shrink-0"
+              className="p-1 text-muted-foreground hover:text-danger transition shrink-0 hover:cursor-pointer"
               aria-label="Delete this record"
             >
               <Trash2 size={16} />
@@ -47,7 +47,7 @@ export default function HistoryCard({ item, onDeleteClick }) {
 
         <button
           onClick={() => router.push(`/diagnosis/${item._id}`)}
-          className="text-primary font-semibold text-sm flex items-center gap-1 w-fit"
+          className="text-primary font-semibold text-sm flex items-center gap-1 w-fit hover:cursor-pointer"
         >
           View full report
           <ArrowRight size={14} />
