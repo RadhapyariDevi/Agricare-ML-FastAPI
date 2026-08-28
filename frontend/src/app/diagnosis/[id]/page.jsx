@@ -2,7 +2,7 @@
 
 import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { AlertTriangle, Percent, Stethoscope, Camera, Wrench } from "lucide-react";
+import { AlertTriangle, Percent, Stethoscope, Camera, Wrench, Info } from "lucide-react";
 import api from "@/lib/api";
 
 export default function DiagnosisPage({ params }) {
@@ -136,6 +136,14 @@ export default function DiagnosisPage({ params }) {
               ))}
             </div>
           </div>
+          <div className="flex gap-2 items-start bg-input-bg border border-border rounded-lg px-4 py-3 mt-4">
+  <Info className="text-muted shrink-0 mt-0.5" size={16} />
+  <p className="text-muted text-sm">
+    This is general guidance, not a substitute for professional advice.
+    If symptoms are severe or don't improve, consult a local agricultural
+    extension office or plant pathologist.
+  </p>
+</div>
         </div>
       )}
     </div>

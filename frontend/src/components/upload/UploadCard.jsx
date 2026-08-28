@@ -1,7 +1,7 @@
 "use client";
 import { Leaf, Camera } from "lucide-react";
 import { useState, useRef } from "react";
-import api from "@/lib/api";
+import { analyzeLeafImage } from "@/services/diagnosis.service";
 import { useRouter } from "next/navigation";
 
 export default function UploadCard() {
@@ -20,30 +20,26 @@ export default function UploadCard() {
   };
 
   const handleAnalyze = async () => {
-  if (!file) return;
+    if (!file) return;
 
-  setIsUploading(true);
-  setError("");
+    setIsUploading(true);
+    setError("");
 
-  try {
-    const formData = new FormData();
-    formData.append("image", file);
+    try {
+      const response = await analyzeLeafImage(file);
 
-    const response = await api.post("/diagnosis/analyze", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-
-    const diagnosisId = response.data?.diagnosis?._id;
-    router.push(`/diagnosis/${diagnosisId}`);
-  } catch (err) {
-    console.error(err);
-    setError(
-      err?.response?.data?.message || "Something went wrong. Please try again."
-    );
-  } finally {
-    setIsUploading(false);
-  }
-};
+      const diagnosisId = response?.diagnosis?._id;
+      router.push(`/diagnosis/${diagnosisId}`);
+    } catch (err) {
+      console.error(err);
+      setError(
+        err?.response?.data?.message ||
+          "Something went wrong. Please try again.",
+      );
+    } finally {
+      setIsUploading(false);
+    }
+  };
 
   return (
     <div className="flex-1 flex items-center justify-center relative">
@@ -84,14 +80,14 @@ export default function UploadCard() {
                 className="w-full h-full object-cover"
               />
             </div>
-            
+
             <button
-      onClick={handleAnalyze}
-      disabled={isUploading}
-      className="bg-primary text-white font-semibold px-10 py-3 rounded-full shadow-[0px_4px_4px_rgba(96,56,8,0.15)] flex items-center gap-3 hover:bg-primary-hover transition"
-    >
-      {isUploading ? "Analyzing..." : "Analyze Leaf"}
-    </button>
+              onClick={handleAnalyze}
+              disabled={isUploading}
+              className="bg-primary text-white font-semibold px-10 py-3 rounded-full shadow-[0px_4px_4px_rgba(96,56,8,0.15)] flex items-center gap-3 hover:bg-primary-hover transition"
+            >
+              {isUploading ? "Analyzing..." : "Analyze Leaf"}
+            </button>
           </div>
         )}
       </div>
