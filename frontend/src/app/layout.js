@@ -1,7 +1,6 @@
 import "./globals.css";
-import Sidebar from "../components/layout/Sidebar.jsx";
-import {AuthProvider} from "../context/AuthContext.jsx";
-
+import { AuthProvider } from "../context/AuthContext.jsx";
+import AppShell from "../components/layout/AppShell.jsx";
 
 export const metadata = {
   title: "AgriCare",
@@ -11,10 +10,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="flex h-screen overflow-hidden bg-background text-foreground">
+      <body className="bg-background text-foreground">
         <AuthProvider>
-          <Sidebar />
-          <main className="flex-1 h-screen overflow-y-auto p-8">{children}</main>
+          <AppShell>{children}</AppShell>
         </AuthProvider>
       </body>
     </html>
