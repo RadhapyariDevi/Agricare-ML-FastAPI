@@ -1,8 +1,9 @@
 "use client";
-import { Leaf, Camera } from "lucide-react";
+import { Leaf, Camera, X } from "lucide-react";
 import { useState, useRef } from "react";
 import { analyzeLeafImage } from "@/services/diagnosis.service";
 import { useRouter } from "next/navigation";
+import UploadErrorModal from "./UploadErrorModal";
 
 export default function UploadCard() {
   const [file, setFile] = useState(null);
@@ -41,6 +42,15 @@ export default function UploadCard() {
     }
   };
 
+  const isNoLeafError = error === "No leaf detected in the image";
+
+  const handleReset = () => {
+    setFile(null);
+    setPreview(null);
+    setError("");
+    if (inputRef.current) inputRef.current.value = "";
+  };
+
   return (
     <div className="flex-1 flex items-center justify-center relative">
       <div className="absolute -inset-12 bg-primary/5 rounded-full blur-3xl -z-10" />
@@ -64,7 +74,7 @@ export default function UploadCard() {
             <p className="text-muted mb-8">or click to browse</p>
             <button
               onClick={() => inputRef.current?.click()}
-              className="bg-primary text-white font-semibold px-10 py-3 rounded-full shadow-[0px_4px_4px_rgba(96,56,8,0.15)] flex items-center gap-3 hover:bg-primary-hover transition"
+              className="bg-primary text-white font-semibold px-10 py-3 rounded-full shadow-[0px_4px_4px_rgba(96,56,8,0.15)] flex items-center gap-3 hover:bg-primary-hover transition cursor-pointer"
             >
               <Camera size={20} />
               Select Photo
@@ -79,18 +89,37 @@ export default function UploadCard() {
                 alt="Selected leaf"
                 className="w-full h-full object-cover"
               />
+              {!isUploading && (
+                <button
+                  onClick={handleReset}
+                  className="absolute top-2 right-2 bg-black/50 text-white rounded-full p-1.5 hover:bg-black/70 transition cursor-pointer"
+                  aria-label="Remove photo"
+                >
+                  <X size={16} />
+                </button>
+              )}
             </div>
 
             <button
               onClick={handleAnalyze}
               disabled={isUploading}
-              className="bg-primary text-white font-semibold px-10 py-3 rounded-full shadow-[0px_4px_4px_rgba(96,56,8,0.15)] flex items-center gap-3 hover:bg-primary-hover transition"
+              className="bg-primary text-white font-semibold px-10 py-3 rounded-full shadow-[0px_4px_4px_rgba(96,56,8,0.15)] flex items-center gap-3 hover:bg-primary-hover transition cursor-pointer"
             >
               {isUploading ? "Analyzing..." : "Analyze Leaf"}
             </button>
           </div>
         )}
       </div>
+
+      {error && (
+        <UploadErrorModal
+          message={error}
+          onDismiss={() => setError("")}
+          onRetry={handleReset}
+        />
+      )}
+      
+
     </div>
   );
 }
