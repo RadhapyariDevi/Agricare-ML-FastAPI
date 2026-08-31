@@ -83,7 +83,7 @@ export default function DiagnosisPage({ params }) {
           </div>
 
           <div className="flex gap-3 w-full pt-3">
-            <button
+            {/* <button
               onClick={() =>
                 document
                   .getElementById("action-plan")
@@ -94,7 +94,7 @@ export default function DiagnosisPage({ params }) {
             >
               <Wrench size={20} />
               Talk with AI
-            </button>
+            </button> */}
             <button
               onClick={() => router.push("/upload")}
               className="border-2 border-tertiary text-foreground font-semibold px-6 py-3 rounded-lg flex items-center justify-center gap-2 cursor-pointer"

@@ -83,7 +83,7 @@ export default function UploadCard() {
         )}
         {preview && (
           <div className="w-full flex flex-col items-center">
-            <div className="relative w-full aspect-square max-w-[260px] rounded-3xl overflow-hidden mb-6">
+            <div className="relative w-full aspect-square max-w-655 rounded-3xl overflow-hidden mb-6">
               <img
                 src={preview}
                 alt="Selected leaf"

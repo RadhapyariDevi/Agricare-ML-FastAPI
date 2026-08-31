@@ -16,8 +16,8 @@ import { useAuth } from "../../context/AuthContext.jsx";
 const navItems = [
   { name: "Upload", href: "/upload", icon: Camera },
   { name: "History", href: "/history", icon: FolderOpen },
-  { name: "Chatbot", href: "/chatbot", icon: MessageSquare },
-  { name: "Agriculture News", href: "/news", icon: Newspaper },
+  // { name: "Chatbot", href: "/chatbot", icon: MessageSquare },
+  // { name: "Agriculture News", href: "/news", icon: Newspaper },
 ];
 
 function Sidebar({ isOpen, onClose }) {
@@ -27,7 +27,7 @@ function Sidebar({ isOpen, onClose }) {
 
   const handleLogout = () => {
     logout();
-    router.push("/login");
+    window.location.href = "/";
   };
 
   return (
